@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Vet" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=JEAN\SQLEXPRESS;Initial Catalog=Vet;Integrated Security=True" SettingsObjectName="capaDatos.Properties.Settings" SettingsPropertyName="VetConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.animal" Member="animal">
+    <Type Name="animal">
+      <Column Name="idAnimal" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nomAnimal" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="edad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Fk_Dueño" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.citas" Member="citas">
+    <Type Name="citas">
+      <Column Name="idCita" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FK_dueño" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_animal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tratamiento" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="concluido" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.dueño" Member="dueño">
+    <Type Name="dueño">
+      <Column Name="idDueño" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nomDueño" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="telefono" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="correo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_loadAnimal" Method="sp_loadAnimal">
+    <ElementType Name="sp_loadAnimalResult">
+      <Column Name="idAnimal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomAnimal" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="edad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Fk_Dueño" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_loadCitas" Method="sp_loadCitas">
+    <ElementType Name="sp_loadCitasResult">
+      <Column Name="idCita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FK_dueño" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_animal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tratamiento" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="concluido" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_loadDueño" Method="sp_loadDueño">
+    <ElementType Name="sp_loadDueñoResult">
+      <Column Name="idDueño" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomDueño" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="telefono" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="correo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_crearDueño" Method="sp_crearDueño">
+    <Parameter Name="nombre" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="telefono" Type="System.String" DbType="VarChar(9)" />
+    <Parameter Name="correo" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_crearAnimal" Method="sp_crearAnimal">
+    <Parameter Name="nombre" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="edad" Type="System.String" DbType="VarChar(2)" />
+    <Parameter Name="color" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="dueño" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_crearCita" Method="sp_crearCita">
+    <Parameter Name="fecha" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="dueño" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="animal" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_buscarCita" Method="sp_buscarCita">
+    <Parameter Name="idCita" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_buscarCitaResult">
+      <Column Name="idCita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FK_dueño" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_animal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tratamiento" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="concluido" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_repotarCita" Method="sp_repotarCita">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="tratamiento" Type="System.String" DbType="VarChar(1)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_loadCitasFuturas" Method="sp_loadCitasFuturas">
+    <ElementType Name="sp_loadCitasFuturasResult">
+      <Column Name="idCita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FK_dueño" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_animal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tratamiento" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="concluido" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_reporteCitasAnimal" Method="sp_reporteCitasAnimal">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_reporteCitasAnimalResult">
+      <Column Name="idCita" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FK_dueño" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_animal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tratamiento" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="concluido" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
